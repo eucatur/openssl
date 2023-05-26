@@ -29,9 +29,9 @@ func FIPSModeSet(mode bool) error {
 
 	var r C.int
 	if mode {
-		r = C.X_EVP_default_properties_enable_fips(nil, 1)
+		r = C.EVP_default_properties_enable_fips(nil, 1)
 	} else {
-		r = C.X_EVP_default_properties_enable_fips(nil, 0)
+		r = C.EVP_default_properties_enable_fips(nil, 0)
 	}
 	if r != 1 {
 		return errorFromErrorQueue()
