@@ -19,13 +19,12 @@ import (
 	"crypto/rand"
 	"crypto/tls"
 	"io"
-	"io/ioutil"
 	"net"
 	"sync"
 	"testing"
 	"time"
 
-	"github.com/spacemonkeygo/openssl/utils"
+	"github.com/eucatur/openssl/utils"
 )
 
 var (
@@ -265,7 +264,7 @@ func ClosingTest(t testing.TB, constructor func(
 
 		go func() {
 			defer wg.Done()
-			data, err := ioutil.ReadAll(sslconn2)
+			data, err := io.ReadAll(sslconn2)
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -562,7 +561,7 @@ func LotsOfConns(t *testing.T, payload_size int64, loops, clients int,
 					}
 				}()
 				for i := 0; i < loops; i++ {
-					_, err := io.Copy(ioutil.Discard,
+					_, err := io.Copy(io.Discard,
 						io.LimitReader(conn, payload_size))
 					if err != nil {
 						t.Fatalf("failed reading: %s", err)
@@ -606,7 +605,7 @@ func LotsOfConns(t *testing.T, payload_size int64, loops, clients int,
 					t.Fatalf("failed writing: %s", err)
 					return
 				}
-				_, err = io.Copy(ioutil.Discard,
+				_, err = io.Copy(io.Discard,
 					io.LimitReader(ssl_client, payload_size))
 				if err != nil {
 					t.Fatalf("failed reading: %s", err)
