@@ -565,3 +565,19 @@ func (c *Ctx) SessSetCacheSize(t int) int {
 func (c *Ctx) SessGetCacheSize() int {
 	return int(C.X_SSL_CTX_sess_get_cache_size(c.ctx))
 }
+
+func (c *Ctx) Deadline() (deadline time.Time, ok bool) {
+	return time.Now(), true
+}
+
+func (c *Ctx) Done() (channel <-chan struct{}) {
+	return channel
+}
+
+func (c *Ctx) Err() error {
+	return nil
+}
+
+func (c *Ctx) Value(key any) any {
+	return nil
+}
